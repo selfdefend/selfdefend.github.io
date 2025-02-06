@@ -142,7 +142,14 @@
       </p>
       <br>
       <p>
-        A high-level overview of the SelfDefend framework and its workflow.
+        SelfDefend creatively establishes a shadow stack alongside the normal stack in the LLM space to conduct checkpoint-based access control. We denote the target LLM in the normal stack as $LLM_{target}$ and the defense LLM in the shadow stack as $LLM_{defense}$. SelfDefend simultaneously utilizes both $LLM_{target}$'s own safety alignment and $LLM_{defense}$'s dedicated jailbreak detection, largely increasing the defense success rate.
+① Given an incoming prompt query $P_{query}$, \name dispatches it to both $LLM_{target}$ and $LLM_{defense}$ for concurrent processing.
+②
+ $LLM_{target}$ processes $P_{query}$ as usual, whether it is a normal prompt or an adversarial prompt, but caches its token-by-token output until a checkpoint is triggered from the shadow stack.
+By contrast, $LLM_{defense}$ employs a tailored detection prompt, $P_{direct}$ or $P_{intent}$, to wrap $P_{query}$ and detect its harmful part (via $P_{direct}$) or intention (via $P_{intent}$).
+③ Once a token of ``No'' (indicating no issue) is output from the shadow stack, $LLM_{target}$ is triggered to release its token-by-token response.
+Otherwise, when the shadow stack detects a harmful portion (prompt/intention), \name would respond with a template that refuses to answer, \textit{i.e.}, ``I can't fulfill your query because your [harmful portion] violated our safety policy.''
+It is noted that ``[harmful portion]'' is replaced with the recognized portion from $LLM_{defense}$.
       </p>
     </div>
   </div>
