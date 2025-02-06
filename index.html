@@ -217,6 +217,33 @@ Since we utilize two defense prompts, we eventually obtain two separate datasets
   </div>
 </section>
 
+<section class="section hero is-small is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3">Successful Cases</h2>
+          <div class="level-set has-text-justified">
+<p>
+                    <img src="static/images/peft.png" alt="Sizes of model trees" class="blend-img-background center-image" style="max-width: 100%; height: auto;" />
+          </p>
+              <p>
+                This figure presents a detection example of our methods applied to a jailbreak query, compared with the Llama Guard series.
+The attack prompt involves creating a fake news article to spread disinformation about a political candidate.
+Both Llama Guard and Llama Guard 2 identify it as safe, while our methods mark its harmful portions.
+The reason our method outperforms Llama Guards might be due to the enhanced reasoning ability of the foundation model in identifying harmful portions.
+
+As described in our design, $P_{direct}$-based model identifies harmful parts directly from the input text, whereas $P_{intent}$-based model summarizes the request's intention and then identifies unsafe parts from that summary.
+When comparing our $P_{direct}$-tuned models with $P_{direct}$-based GPT-4, we observed that the parts they lifted from the attack prompt came from different sentences, since $P_{direct}$ emphasizes that it is sufficient to output one harmful part.
+A similar phenomenon occurs with the intent prompt, where the semantics of GPT-4 and our tuned model's intercepts are not identical.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
